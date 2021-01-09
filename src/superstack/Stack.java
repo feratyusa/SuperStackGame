@@ -35,6 +35,10 @@ public class Stack extends Canvas implements ActionListener{
     public static float scale = 2.0f;
     
     public static int GAME_MENU = 0, GAME_PLAYING = 1, GAME_OVER = 2;
+    public static int gameStatus = GAME_MENU; // 0 = Main Menu, 1 = Playing
+    
+    public static BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
+    public static int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
     
     public Timer timer;
     
@@ -45,12 +49,8 @@ public class Stack extends Canvas implements ActionListener{
     
     public Keyboard keys;
     
-    public static int gameStatus = GAME_MENU; // 0 = Main Menu, 1 = Playing
     public boolean running = false;
     
-    public static BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
-    public static int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
-   
     public Stack(){
         setPreferredSize(new Dimension((int)(WIDTH*scale), (int)(HEIGHT*scale)));
         
@@ -72,17 +72,25 @@ public class Stack extends Canvas implements ActionListener{
     }
     
     public void run(){
+        if(gameStatus == GAME_MENU){
+            render();
+            update();
+        }
         if(gameStatus == GAME_PLAYING){
             if(!running){
                 playing.init();
                 running = true;
             }
+            render();
+            update();
         }
-        else if(gameStatus == GAME_OVER){
-            running = false;
+        if(gameStatus == GAME_OVER){
+            if(running){
+                running = false;
+            }
+            render();
+            update();
         }
-        render();
-        update();
     }
     
     public void update(){

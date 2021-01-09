@@ -6,6 +6,7 @@
 package superstack.game;
 
 import java.awt.event.KeyEvent;
+import superstack.theme.Theme;
 
 /**
  *
@@ -14,6 +15,8 @@ import java.awt.event.KeyEvent;
 public class Game {
     
     Configuration config = new Configuration();
+    public static Theme theme = new Theme();
+    
     public static int bestScore = 0;
     
     public Game(){

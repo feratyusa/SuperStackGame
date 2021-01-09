@@ -19,9 +19,9 @@ public class Renderer {
 	
     public static int[] pixels = new int[w * h];
     
-    public static void renderBackground(){
+    public static void renderBackground(int color){
         for(int i=0;i < pixels.length;i++){
-            pixels[i] = 0xfff4f4f4;
+            pixels[i] = color;
         }
     }
     
@@ -38,7 +38,6 @@ public class Renderer {
 		if(xx >= w || xx < 0) continue;
 				
 		int col = s.pixels[x + y * s.width];
-		if(col == 0xffff00ff) continue;
 		pixels[xx + yy * w] = col;
 				
             }

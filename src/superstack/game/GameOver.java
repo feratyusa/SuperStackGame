@@ -49,40 +49,45 @@ public class GameOver extends Game{
     }
     
     public void render(){
-        Renderer.renderBackground();
+        Renderer.renderBackground(theme.getBackgroundColor());
+        
+        for(int i = 0; i < Stack.pixels.length; i++) {
+            Stack.pixels[i] = Renderer.pixels[i];
+        }
     }
     
     public void renderText(Graphics2D g){
         String s;
         int w;
-        g.setColor(Color.BLACK);
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         
         // Game Over
         g.setFont(new Font("Arial", Font.BOLD, 40));
+        g.setColor(theme.getTitleColor());
         s = "GAME OVER";
         w = g.getFontMetrics().stringWidth(s) / 2;
-        g.drawString(s, Stack.WIDTH * Stack.scale / 2 - w, Stack.HEIGHT * Stack.scale / 2 - 175);
+        g.drawString(s, Stack.WIDTH * Stack.scale / 2 - w, Stack.HEIGHT * Stack.scale / 2 - 150);
         
-        g.setFont(new Font("Arial", Font.PLAIN, 30));
         // Score
+        g.setFont(new Font("Arial", Font.PLAIN, 30));
+        g.setColor(theme.getTextColor());
         s = "Score : "+Playing.score;
         w = g.getFontMetrics().stringWidth(s) / 2;
-        g.drawString(s, Stack.WIDTH * Stack.scale / 2 - w, Stack.HEIGHT * Stack.scale / 2 - 100);
+        g.drawString(s, Stack.WIDTH * Stack.scale / 2 - w, Stack.HEIGHT * Stack.scale / 2 - 85);
         
         // Best Score
         s = "Best Score : "+bestScore;
         w = g.getFontMetrics().stringWidth(s) / 2;
-        g.drawString(s, Stack.WIDTH * Stack.scale / 2 - w, Stack.HEIGHT * Stack.scale / 2 - 60);
+        g.drawString(s, Stack.WIDTH * Stack.scale / 2 - w, Stack.HEIGHT * Stack.scale / 2 - 55);
         
         // Options Menu
         g.setFont(new Font("Arial", Font.PLAIN, 20));
         for(int i=0;i<options.length;i++){
             if(this.selected == i) g.setColor(Color.GREEN);
-            else g.setColor(Color.BLACK);
+            else g.setColor(theme.getTextColor());
             s = options[i];
             w = g.getFontMetrics().stringWidth(s) / 2;
-            g.drawString(s, Stack.WIDTH * Stack.scale / 2 - w, Stack.HEIGHT * Stack.scale / 2 + i * 40);
+            g.drawString(s, Stack.WIDTH * Stack.scale / 2 - w, Stack.HEIGHT * Stack.scale / 2 + (i+1)*40);
         }
     }
     

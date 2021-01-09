@@ -38,7 +38,7 @@ public class Playing extends Game{
     }
     
     public void init(){
-        objectSprite = new Sprite(100, 29, 0);
+        objectSprite = new Sprite(100, 29, theme.getSpriteColor());
         objects = new ArrayList<GameObject>();
         objects.add(new GameObject(Stack.WIDTH/2 - objectSprite.width/2, Stack.HEIGHT - 30, objectSprite, false));
         objects.add(new GameObject(Stack.WIDTH/2 - objectSprite.width/2, Stack.HEIGHT - 30 * 2, objectSprite, false));
@@ -73,7 +73,7 @@ public class Playing extends Game{
         if(spawnNew){
             if(!animating){
                 score++;
-                objectSprite = new Sprite(objects.get(objects.size()-1).width, 29, 0);
+                objectSprite = new Sprite(objects.get(objects.size()-1).width, 29, theme.getSpriteColor());
                 objects.add(new GameObject(rand.nextInt(Stack.WIDTH)-objectSprite.width, Stack.HEIGHT - 30 *4, objectSprite, true));
                 spawnNew = false;
             }
@@ -97,7 +97,7 @@ public class Playing extends Game{
     }
     
     public void render(){
-        Renderer.renderBackground();
+        Renderer.renderBackground(theme.getBackgroundColor());
 
 	for(int i = 0; i < objects.size(); i++) {
             objects.get(i).render();
@@ -109,7 +109,8 @@ public class Playing extends Game{
     }
     
     public void renderText(Graphics2D g){
-        g.setFont(new Font("Arial", 0, 20));
+        g.setFont(new Font("Arial", Font.PLAIN, 20));
+        g.setColor(theme.getTextColor());
 	g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
                 
 	String s = "Score: " + Playing.score;

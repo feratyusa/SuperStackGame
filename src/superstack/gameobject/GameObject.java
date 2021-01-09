@@ -8,6 +8,7 @@ package superstack.gameobject;
 import java.awt.event.KeyEvent;
 import java.util.Random;
 import superstack.Stack;
+import superstack.game.Game;
 import superstack.game.Playing;
 import superstack.input.Keyboard;
 import superstack.renderer.Renderer;
@@ -17,7 +18,7 @@ import superstack.renderer.Sprite;
  *
  * @author Asus
  */
-public class GameObject {
+public class GameObject extends Game{
     
     public float x, y, newY;
     public int width, height;
@@ -40,7 +41,7 @@ public class GameObject {
     }
     
     public void setWidth(int newWidth){
-        this.sprite = new Sprite(newWidth, height, 0);
+        this.sprite = new Sprite(newWidth, height, theme.getSpriteColor());
 	this.width = newWidth;
     }
     
