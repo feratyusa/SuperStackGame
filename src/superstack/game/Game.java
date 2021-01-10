@@ -6,6 +6,7 @@
 package superstack.game;
 
 import java.awt.event.KeyEvent;
+import superstack.gamecomment.GameComment;
 import superstack.theme.Theme;
 
 /**
@@ -15,9 +16,15 @@ import superstack.theme.Theme;
 public class Game {
     
     Configuration config = new Configuration();
+    
     public static Theme theme = new Theme();
     
+    public static GameComment gameComment = new GameComment();
+    public static int commentTime = 0;
+    public static String comment;
+    
     public static int bestScore = 0;
+    
     
     public Game(){
         

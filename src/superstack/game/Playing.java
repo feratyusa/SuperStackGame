@@ -5,6 +5,7 @@
  */
 package superstack.game;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -113,12 +114,25 @@ public class Playing extends Game{
         g.setColor(theme.getTextColor());
 	g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
                 
+        // Score
 	String s = "Score: " + Playing.score;
 	int w = g.getFontMetrics().stringWidth(s) / 2;
 	g.drawString(s, Stack.WIDTH * Stack.scale / 2 - w, 80);
                 
+        // Best Score
 	String best = "Best: " + Game.bestScore;
 	int bw = g.getFontMetrics().stringWidth(best) / 2;
 	g.drawString(best, Stack.WIDTH * Stack.scale / 2 - bw, 120);
+        
+        // Comment
+        if(commentTime > 0 && !comment.equals(null)){
+            g.setFont(new Font("Lucida Handwriting", Font.BOLD, 25));
+            g.setColor(Color.RED);
+            String com = comment;
+            int cw = g.getFontMetrics().stringWidth(com) / 2;
+            g.drawString(com, Stack.WIDTH * Stack.scale / 2 - cw, 250);
+            commentTime--;
+        }
+        
     }
 }

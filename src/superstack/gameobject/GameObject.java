@@ -28,6 +28,8 @@ public class GameObject extends Game{
 
     public Random rand = new Random();
     
+    private boolean goldColor = false;
+    
     public GameObject(int x, int y, Sprite sprite, boolean moving){
         this.x = x;
 	this.y = y;
@@ -41,7 +43,13 @@ public class GameObject extends Game{
     }
     
     public void setWidth(int newWidth){
-        this.sprite = new Sprite(newWidth, height, theme.getSpriteColor());
+        if(goldColor){
+            this.sprite = new Sprite(newWidth, height, 0xffffd700);
+            goldColor = false;
+        }
+        else{
+            this.sprite = new Sprite(newWidth, height, theme.getSpriteColor());
+        }
 	this.width = newWidth;
     }
     
@@ -59,11 +67,32 @@ public class GameObject extends Game{
             if(Keyboard.keyUp(KeyEvent.VK_SPACE)){
                 this.moving = false;
                 int previousWidth = Playing.objects.get(Playing.objects.size() - 2).width;
-                int newWidth = (int) ((previousWidth - Math.abs(Stack.WIDTH / 2 - (x + width / 2))));
+                int newWidth;
+                if(rand.nextInt(5) == 3){
+                    newWidth = 100;
+                    goldColor = true;
+                }
+                else{
+                     newWidth = (int) ((previousWidth - Math.abs(Stack.WIDTH / 2 - (x + width / 2))));
+                }
                 if(newWidth < 0) {
                     Playing.gameOver = true;
                     return;
 		}
+                int widthPercentage = (int) (newWidth*100/previousWidth);
+                if(goldColor){
+                    comment = gameComment.getComment("GOLDEVENT");
+                }
+                else if(widthPercentage > 90){
+                    comment = gameComment.getComment("EXCELLENT");
+                }
+                else if(widthPercentage > 50){
+                    comment = gameComment.getComment("GOOD");
+                }
+                else if(widthPercentage > 0){
+                    comment = gameComment.getComment("BAD");
+                }
+                commentTime = 100;
 		setWidth(newWidth);
             }
         }

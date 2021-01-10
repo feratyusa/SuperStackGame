@@ -77,7 +77,7 @@ public class Theme {
             case 1:
                 return 0xff000000; // Black
             case 2:
-                return 0xff000000;
+                return 0xff000000; // Black
             default:
                 return -1;
         }
@@ -90,7 +90,7 @@ public class Theme {
             case 1:
                 return 0xfff4f4f4; // White-Gray
             case 2:
-                return 0xff0011ff;
+                return 0xff0011ff; // Blue
             default:
                 return -1;
         }
