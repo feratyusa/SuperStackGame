@@ -6,7 +6,9 @@
 package superstack.game;
 
 import java.awt.event.KeyEvent;
+import superstack.Audio.Audio;
 import superstack.gamecomment.GameComment;
+import superstack.resource.Resources;
 import superstack.theme.Theme;
 
 /**
@@ -17,6 +19,8 @@ public class Game {
     
     Configuration config = new Configuration();
     
+    public static Resources resources = new Resources();
+    
     public static Theme theme = new Theme();
     
     public static GameComment gameComment = new GameComment();
@@ -25,6 +29,7 @@ public class Game {
     
     public static int bestScore = 0;
     
+    public static boolean goldColor = false;
     
     public Game(){
         

@@ -5,12 +5,9 @@
  */
 package superstack;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 import javax.swing.JFrame;
-import javax.swing.Timer;
 
 /**
  *

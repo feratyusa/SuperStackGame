@@ -45,6 +45,7 @@ public class GameOver extends Game{
             else if(this.selected == 1){
                 Stack.gameStatus = Stack.GAME_MENU;
             }
+            Playing.bgm.stop();
         }
     }
     

@@ -6,13 +6,17 @@
 package superstack.gameobject;
 
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 import java.util.Random;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import superstack.Stack;
 import superstack.game.Game;
 import superstack.game.Playing;
 import superstack.input.Keyboard;
 import superstack.renderer.Renderer;
 import superstack.renderer.Sprite;
+import superstack.resource.Resources;
 
 /**
  *
@@ -24,11 +28,9 @@ public class GameObject extends Game{
     public int width, height;
     public Sprite sprite;
     public boolean moving, animate = false;
-    public double speed = 1.0, maxSpeed = 3.0;
+    public double speed = 2.0, maxSpeed = 5.0;
 
-    public Random rand = new Random();
-    
-    private boolean goldColor = false;
+    public Random rand = new Random();    
     
     public GameObject(int x, int y, Sprite sprite, boolean moving){
         this.x = x;
@@ -82,6 +84,7 @@ public class GameObject extends Game{
                 int widthPercentage = (int) (newWidth*100/previousWidth);
                 if(goldColor){
                     comment = gameComment.getComment("GOLDEVENT");
+//                    audio.play(Resources.GOLD_FX);s
                 }
                 else if(widthPercentage > 90){
                     comment = gameComment.getComment("EXCELLENT");

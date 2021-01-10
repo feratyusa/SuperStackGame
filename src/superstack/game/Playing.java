@@ -9,13 +9,18 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import superstack.Audio.Audio;
 import superstack.Stack;
 import superstack.gameobject.GameObject;
 import superstack.renderer.Renderer;
 import superstack.renderer.Sprite;
+import superstack.resource.Resources;
 
 /**
  *
@@ -34,11 +39,16 @@ public class Playing extends Game{
     
     public static int score = 0;
     
+    public static Audio bgm;
+    
     public Playing(){
         
     }
     
     public void init(){
+        bgm = new Audio(resources.getBGM());
+        bgm.play();
+        
         objectSprite = new Sprite(100, 29, theme.getSpriteColor());
         objects = new ArrayList<GameObject>();
         objects.add(new GameObject(Stack.WIDTH/2 - objectSprite.width/2, Stack.HEIGHT - 30, objectSprite, false));
@@ -63,6 +73,9 @@ public class Playing extends Game{
                 bestScore = score;
             }
             Stack.gameStatus = Stack.GAME_OVER;
+            bgm.stop();
+            bgm = new Audio(resources.getOver());
+            bgm.play();
             return;
         }
         
